@@ -18,6 +18,7 @@ function App() {
     const errorMin = minValue < 0
     const error = errorMax || errorMin
 
+
     useEffect(() => {
         let newMinValue = localStorage.getItem('minValue')
         let newMaxValue = localStorage.getItem('maxValue')
