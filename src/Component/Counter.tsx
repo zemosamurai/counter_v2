@@ -8,12 +8,12 @@ type CounterPropsType = {
     setCount: (count: number) => void
     minValue: number
     maxValue: number
-    error: boolean
     disabled: boolean
 }
 
 export const Counter = (props: CounterPropsType) => {
-    const {count, setCount, minValue, maxValue, error, disabled} = props
+    const {count, setCount, minValue, maxValue, disabled} = props
+    const error = props.maxValue <= props.minValue || props.minValue < 0
 
     const onClickUp = () => count < maxValue && setCount(count + 1)
     const onClickReset = () => setCount(minValue)
@@ -36,7 +36,7 @@ export const Counter = (props: CounterPropsType) => {
                 <Button
                     name={'reset'}
                     callback={onClickReset}
-                    disable={!disabled || error} // {count === minValue}
+                    disable={!disabled || error}
                     style={s.btn}
                 />
             </div>
