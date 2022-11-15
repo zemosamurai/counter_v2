@@ -8,13 +8,13 @@ type SettingCounterPropsType = {
     setMinValue: (value: number) => void
     setMaxValue: (value: number) => void
     updateCounter: () => void
-    errorMax: boolean
-    error: boolean
     disabled: boolean
     setDisabled: (value: boolean) => void
 }
 
 export const SettingCounter = (props: SettingCounterPropsType) => {
+    const errorMax = props.maxValue <= props.minValue
+    const error = errorMax || props.minValue < 0
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => props.setMaxValue(+e.currentTarget.value)
     const onChangeStartHandler = (e: ChangeEvent<HTMLInputElement>) => props.setMinValue(+e.currentTarget.value)
@@ -32,7 +32,7 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
                     <input
                         value={props.maxValue}
                         onFocus={onFocusHandler}
-                        className={props.errorMax ? s.errorInput : ''}
+                        className={errorMax ? s.errorInput : ''}
                         type={"number"}
                         onChange={onChangeMaxHandler}
                     />
@@ -44,7 +44,7 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
                         onFocus={onFocusHandler}
                         type={"number"}
                         onChange={onChangeStartHandler}
-                        className={props.error ? s.errorInput : ''}
+                        className={error ? s.errorInput : ''}
                     />
                 </div>
             </div>
@@ -52,7 +52,7 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
                 <Button
                     name={'set'}
                     callback={onSetHandler}
-                    disable={props.disabled || props.error}
+                    disable={props.disabled || error}
                     style={s.btn}
                 />
             </div>
