@@ -14,11 +14,6 @@ function App() {
         localStorage.setItem('minValue', JSON.stringify(minValue))
         localStorage.setItem('maxValue', JSON.stringify(maxValue))
     }
-    const errorMax = maxValue <= minValue
-    const errorMin = minValue < 0
-    const error = errorMax || errorMin
-
-
     useEffect(() => {
         let newMinValue = localStorage.getItem('minValue')
         let newMaxValue = localStorage.getItem('maxValue')
@@ -37,8 +32,6 @@ function App() {
                 setMinValue={setMinValue}
                 setMaxValue={setMaxValue}
                 updateCounter={updateCounter}
-                errorMax={errorMax}
-                error={error}
                 disabled={disabled}
                 setDisabled={setDisabled}
 
@@ -48,7 +41,6 @@ function App() {
                 setCount={setCount}
                 minValue={minValue}
                 maxValue={maxValue}
-                error={error}
                 disabled={disabled}
             />
         </div>
